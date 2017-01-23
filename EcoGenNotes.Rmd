@@ -1,0 +1,63 @@
+---
+author: Samantha A. Alger
+date: 23, January 2017
+title: "EcoGenNotes"
+output: html_document
+---
+
+
+##23, January 2017
+###Next Gen Sequencing 
+
+**Glossary:** 
+  
+* short (50 bp)
+* long (100 bp, 150, 300 bp -Hi-seq)
+* 10,000-60,000 bp (SMART)
+* single vs. paired end
+* "Reduce representation": RNA, GBS/RAD seq, near restriction sites
+
+**OUTLINE**
+    
+* Advances in Seq Tech
+* Range of Applications (Whole Genome Sequencing (WGS), RNAseq, ChipSeq-chromatin immunization sequencing, targeted/capture seq. (use probes that target something)) Whatever the application, probably using Illumina sequencing- sequencing by synthesis (90% of the global data).
+
+* General Library Prep. Workflow
+* Sequencing-by-synthesis (SBS)
+* Other Technologies
+* Learning Activity
+
+**Human Genome Project**
+2001-2003
+
+**ABI-Sanger**       
+-15 years     
+-1 genome   
+-$3 B     
+
+
+**Hi Seq X Ten releases**      
+-2014      
+-Illumina      
+-1 day  
+-45 whole genomes human   
+-$1000 each   
+
+**What technique you choose depends on what your question is**  
+-where is genetic variation 
+-phenotypes 
+-#samples 
+-population v. individual 
+-comparative studies  
+-model or not?  
+-demographic history  
+-adaptive genetic variation 
+-gene expression var. 
+
+Major decision points: Length of reads, and number of reads, and distribution
+
+WorkFlow: Extraction to get DNA or RNA, if RNA- change into cDNA, fragment sample, ligate adaptors (individual barcodes), add seq. adaptors, PCR).
+
+Extracted DWN with adaptors and put into a lane. bridge amplification, cluster gen. labeled dNTPs build on and a snap shot is taken everytime one is added. 
+
+"den novo" assembly"- with non-model organism.
