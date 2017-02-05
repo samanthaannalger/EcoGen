@@ -213,76 +213,13 @@
 
 ------
 <div id='id-section1'/>
-### Page 1: 2017-01-18. EXPERIMENT IDEAS:
-
-#####IMIDACLOPRID/RNA VIRUS EXPERIMENT:
-
--We hypothesis that bees dosed with imidacloprid then exposed to RNA viruses will experience higher viral prevalence but lower intensity (i.e. viral load). 
-
--Why you ask? Because the viruses might be able to infect more bees with compromised immune systems (from the imidacloprid) the viruses might not be able to replicate as well in them as they require intact machinery to reproduce in the host cells. 
-
-#####INFECTED POLLEN LOADS IN BEES:
-
-The current assumption is that when you have a bee with a low viral load, it is probably just pollen in their gut. If you have a bee with a high viral load, this is probably an active infection. Is this true? Or, can high viral loads exist on pollen and be causing high viral load results in bees? Can all/most low viral infections be attributed to infected pollen in gut? Are these safe assumptions to make?  
-Question to explore:
-
-1.What viral loads are attributed to infected pollen in the gut vs. actual viral infection in bee? 2. How does the viral load in the pollen differ from that found in the bee?
-Approach: Test pollen, feed to pollen starved bees, test bees.
-
-2.How often do we find bees in the field infected after pollen starving them?
-Approach: Catch bumble bees in the field, pollen starve them, test them.
-
-Use math to compensate for infected pollen in gut vs. actual infection in bee. What kinds of viral loads can be attributed to pollen vs. actual infection?
-
-
-#####PLANT TRANSMISSION EXP.
-Make micro colonies and allow them to get big and juicy. (can give micro colonies some larvae from the large colony to get them started!)
-Make sentinel flowers and let infected honey bees forage on them.
-Give sentinel flowers to bumble bees for (2+weeks). give new flowers everyday. Allow bumble bees to be trained on the flowers so that they are visiting pollen (on pipe cleaners) and sucrose dishes.
-Also give experimentally infected flowers to bumble bees. (infect pollen or sucrose).
-Rear bumble bees out, pollen starve last 3 days after sacrificing colonies. Test workers as well as the offspring. 
-
-Maybe the pollen fed to the offspring are getting the bees infected.
-
-ALSO!! We should test the queens that Alex collected from the last plant transmission experiment. There should be around ~15 from treatment and control groups that survived to the bitter end. These offspring could have been exposed to the infected pollen of foraging workers from the plant transmission experiment. 
-
-
-#####To Do
-
-* get script on plant density/diversity from Leif 
-* Effect of particular plant species (ask Leif)
-* Migratory Yards? Check it out
-* Varroa load data (NHBS) might be able to use it
-* figure on viral loads
-* GIS spacial analysis using HB apiary data
-* histogram (scatter) with bees below Lim. of Detection marked under a threshold line
-* test viral load data for normality 
-* bee abundance data
-
-
+### Page 1:
 ------
 <div id='id-section2'/>
-### Page 2: 2017-01-22. Plant Transmission Experiment: 
-
-#####Thoughts based on recent results of viruses detected on plants:   
-
-All the BFT plants in the treatment group were positive for BQCV. None were positive for DWV. DWV was only detected in WC and RC. It seems that BQCV is more easily left behind on BFT than the other plants. At this point, we cannot say whether Bumble bees or honey bees are better transmitters. Must test pre Bumble bees for BQCV (pre experiment, pollen starved, collected from colonies of origin prior to comingle experiment). Are viruses dispersed in different ways? DWV left behind in salivary secretions and BQCV left behind fecally? 
-
+### Page 2:
 ------
 <div id='id-section3'/>
-### Page 3: 2017 01-27. Lab Work To Do List
-
-* 2015 Survey Plants
-* 2016 Diversity Plants PlantTrans
-* Extraction Protocols for migratory bees
-* Finish bees from plant transmission experiment 
-
-		- pre exp. pollen starved bees (check for BQCV)   
-		- finish all treatment bees   
-* Imidacloprid bees
-
-**LSV and Nosema in 2015 bees; funding from GCOA - centennial pollinator grant**
-
+### Page 3:
 ------
 <div id='id-section4'/>
 ### Page 4:
