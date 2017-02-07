@@ -9,12 +9,12 @@
 
 
 # Table of contents (for 200 entries)    
-* [Page 1: ](#id-section1).
-* [Page 2: ](#id-section2).
-* [Page 3: ](#id-section3).
-* [Page 4:](#id-section4).
-* [Page 5:](#id-section5).
-* [Page 6:](#id-section6).
+* [Page 1: 2017-01-23](#id-section1). Next Gen Sequencing
+* [Page 2: 2017-01-25](#id-section2). QTNs and Project ideas
+* [Page 3: 2017-01-30](#id-section3). Project ideas
+* [Page 4: 2017-02-01](#id-section4). Genome sequencing types
+* [Page 5: 2017-02-01](#id-section5). Getting onto Unix Server, Terminal Commands
+* [Page 6: 2017-02-07](#id-section6). RNA-seq Tutorial
 * [Page 7:](#id-section7).
 * [Page 8:](#id-section8).
 * [Page 9:](#id-section9).
@@ -213,85 +213,520 @@
 
 ------
 <div id='id-section1'/>
-### Page 1: 2017-01-18. EXPERIMENT IDEAS:
+### Page 1: 2017-01-23
 
-#####IMIDACLOPRID/RNA VIRUS EXPERIMENT:
+### Next Gen Sequencing
 
--We hypothesis that bees dosed with imidacloprid then exposed to RNA viruses will experience higher viral prevalence but lower intensity (i.e. viral load). 
+**Glossary:** 
 
--Why you ask? Because the viruses might be able to infect more bees with compromised immune systems (from the imidacloprid) the viruses might not be able to replicate as well in them as they require intact machinery to reproduce in the host cells. 
+- short (50 bp)
+- long (100 bp, 150, 300 bp -Hi-seq)
+- 10,000-60,000 bp (SMART)
+- single vs. paired end
+- "Reduce representation": RNA, GBS/RAD seq, near restriction sites
 
-#####INFECTED POLLEN LOADS IN BEES:
+**OUTLINE**
+​    
 
-The current assumption is that when you have a bee with a low viral load, it is probably just pollen in their gut. If you have a bee with a high viral load, this is probably an active infection. Is this true? Or, can high viral loads exist on pollen and be causing high viral load results in bees? Can all/most low viral infections be attributed to infected pollen in gut? Are these safe assumptions to make?  
-Question to explore:
+- Advances in Seq Tech
+- Range of Applications (Whole Genome Sequencing (WGS), RNAseq, ChipSeq-chromatin immunization sequencing, targeted/capture seq. (use probes that target something)) Whatever the application, probably using Illumina sequencing- sequencing by synthesis (90% of the global data).
+- General Library Prep. Workflow
+- Sequencing-by-synthesis (SBS)
+- Other Technologies
+- Learning Activity
 
-1.What viral loads are attributed to infected pollen in the gut vs. actual viral infection in bee? 2. How does the viral load in the pollen differ from that found in the bee?
-Approach: Test pollen, feed to pollen starved bees, test bees.
+**Human Genome Project**
+2001-2003
 
-2.How often do we find bees in the field infected after pollen starving them?
-Approach: Catch bumble bees in the field, pollen starve them, test them.
+**ABI-Sanger**       
+-15 years     
+-1 genome   
+-$3 B     
 
-Use math to compensate for infected pollen in gut vs. actual infection in bee. What kinds of viral loads can be attributed to pollen vs. actual infection?
+**Hi Seq X Ten releases**      
+-2014      
+-Illumina      
+-1 day  
+-45 whole genomes human   
+-$1000 each   
 
+**What technique you choose depends on what your question is**  
+-where is genetic variation 
+-phenotypes 
+-#samples 
+-population v. individual 
+-comparative studies  
+-model or not?  
+-demographic history  
+-adaptive genetic variation 
+-gene expression var. 
 
-#####PLANT TRANSMISSION EXP.
-Make micro colonies and allow them to get big and juicy. (can give micro colonies some larvae from the large colony to get them started!)
-Make sentinel flowers and let infected honey bees forage on them.
-Give sentinel flowers to bumble bees for (2+weeks). give new flowers everyday. Allow bumble bees to be trained on the flowers so that they are visiting pollen (on pipe cleaners) and sucrose dishes.
-Also give experimentally infected flowers to bumble bees. (infect pollen or sucrose).
-Rear bumble bees out, pollen starve last 3 days after sacrificing colonies. Test workers as well as the offspring. 
+Major decision points: Length of reads, and number of reads, and distribution
 
-Maybe the pollen fed to the offspring are getting the bees infected.
+WorkFlow: Extraction to get DNA or RNA, if RNA- change into cDNA, fragment sample, ligate adaptors (individual barcodes), add seq. adaptors, PCR).
 
-ALSO!! We should test the queens that Alex collected from the last plant transmission experiment. There should be around ~15 from treatment and control groups that survived to the bitter end. These offspring could have been exposed to the infected pollen of foraging workers from the plant transmission experiment. 
+Extracted DWN with adaptors and put into a lane. bridge amplification, cluster gen. labeled dNTPs build on and a snap shot is taken everytime one is added. 
 
-
-#####To Do
-
-* get script on plant density/diversity from Leif 
-* Effect of particular plant species (ask Leif)
-* Migratory Yards? Check it out
-* Varroa load data (NHBS) might be able to use it
-* figure on viral loads
-* GIS spacial analysis using HB apiary data
-* histogram (scatter) with bees below Lim. of Detection marked under a threshold line
-* test viral load data for normality 
-* bee abundance data
-
+"den novo" assembly"- with non-model organism.
 
 ------
 <div id='id-section2'/>
-### Page 2: 2017-01-22. Plant Transmission Experiment: 
+### Page 2: 2017-01-25 
 
-#####Thoughts based on recent results of viruses detected on plants:   
+### QTNs 
 
-All the BFT plants in the treatment group were positive for BQCV. None were positive for DWV. DWV was only detected in WC and RC. It seems that BQCV is more easily left behind on BFT than the other plants. At this point, we cannot say whether Bumble bees or honey bees are better transmitters. Must test pre Bumble bees for BQCV (pre experiment, pollen starved, collected from colonies of origin prior to comingle experiment). Are viruses dispersed in different ways? DWV left behind in salivary secretions and BQCV left behind fecally? 
+### Outline:
+
+1. What are QTNs?
+2. Quantitative genetic theory of adaptive traits?
+
+- V~a~
+- h^2^
+
+1. Methods
+
+- linkage mapping
+
+- GWAS
+
+  - selection scams
+
+  QTN = "Qunatitative trait nucleotides", most simple SNPS
+  Study of **quantiative traits**- traits that have continuous distributions, traits have a mean and variance. 
+
+```
+variance between the two allehels to determine the "average effect"
+```
+
+```
+* flowering time- quantitative trait
+* flower color- Mendelian trait -discrete
+* thermal tolerance
+* venom potency
+* defense compounds
+* drought tolerance
+* altitude tolerance (hypoxia)
+```
+
+```
+Most populations are at their adaptive peak- because of this, selection on a small mutation might move fitness up or down. selection on a large mutation, would most likely move fitness down- therefore, most of selection occurs on small mutations because large mutations are usually  deleterious. 
+```
+
+```
+​
+```
+
+## Seastar wasting disease overview:
+
+- High morality rate and affects many species. East and West coast.    
+- What is causing it?-unknown  
+  - In hours or days, a healthy individual with lose legs, innards expload out  
+  - 2012 first account, 2014- really bad, still occuring but less severe. There have been reports of seastar wasting in 1970s.  
+  - Densovirus implicated (Hewsonet al., 2015, PNAS) (SSDNA virus)  
+  - coauthors are not convinced that this is causal pathogen.  
+  - also present in 70 year old museum specimens.  
+  - It could be that something gets out of balance in their normal microbiome and allows the pathogen to make the animal sick.   
+  - Finding that cause of disease is a challenge.  
+  - Field sampling and lab studies  
+
+## Melanie's experiment:
+
+- take biopsy, exracted total RNA, polyA tail to selected mRNA (to get just genes that are coding for proteins), sequenced on hi-illumina, amplified sequences, (get results for microbes on skin, 16S data), photo taken before or after biopsy
+
+## Questions for Seastar wasting:
+
+1. What is the role of host microbiota in disease prev?
+2. How does expression of immune related genes differ between the sick vs. health?
+   Can understanding something about the immune response tell us something about what type of pathogen we are dealing with? for example: RNAi is used in antiviral defense. 
 
 ------
 <div id='id-section3'/>
-### Page 3: 2017 01-27. Lab Work To Do List
+### Page 3: 2017-01-30
 
-* 2015 Survey Plants
-* 2016 Diversity Plants PlantTrans
-* Extraction Protocols for migratory bees
-* Finish bees from plant transmission experiment 
+## Project ideas/overview:
 
-		- pre exp. pollen starved bees (check for BQCV)   
-		- finish all treatment bees   
-* Imidacloprid bees
+Targetted approach to see differences in immune related genes over time- as 'infection progressed'. 
+Also look for differences between sick v. healthy individuals. 
 
-**LSV and Nosema in 2015 bees; funding from GCOA - centennial pollinator grant**
+H vs. S
+
+Jonathan Rast- reviews on sea urchin immunity. 
+Adaptive/innate immune system: 220 Toll- like reptors
+vs. human (20 receptors) 
+
+Methods:
+Identify genes related to immune response to particular pathogens. Pair with random group of genes to see if there really is upregulation or if it is an artifact. 
+Find groups of sick individuals and look at the dataset associated with when each individuals go from healthy to sick.
+Pair with healthy individuals at the same time points. 
+
+HH: 5
+SS: 5
+HS: 5
+x two time steps
+= 30 data sets
+
+Can we tell anything about the pathogen identity based on expression of immune genes?
+What is the immune response? Is it different between 2 spp. of starfish?
+
+Blast against other infected seastars to be confident that these seastars are infected with Densovirus.
+
+
+
+
 
 ------
 <div id='id-section4'/>
-### Page 4:
+### Page 4: 2017-02-01
+
+## Genome sequencing types
+
+homework:
+
+- Send link of GitHub notebook to Andrew
+- Project proposal due to Melissa and Stephen next Monday:
+  - Hypothesis, and how we plan to test it.
+- Sign up for 1 info update and 1 discussion
+
+## Whole Genome Sequencing
+
+- applications:
+  - high power resolution
+    - population genetics
+    - conservation- control breeding programs etc. 
+    - screen for variation and adaptive potential 
+    - impacts of genetic variation
+    - plastic responses to the environment
+    - local adaptation
+  - sometimes you need reference genome- other times you don't: 
+    - you **don't need** it with: De novo assembly, adaptations, gene expression patterns, 
+    - you **need** it with: select important variation, epigenetic modification, DNA-protein, gene expression
+- Prior considerations:
+  - $
+  - Computational
+    - geater than 1 T byte
+    - Server
+    - command line 
+    - Python/perl
+- Limitations:
+  - polymorphic genes- core genes that are highly conserved
+  - Paralogs
+  - rapidly evolving genes
+  - large gene families- poor representation
+  - 1 individual
+  - pooled samples
+  - Impossible to sequence all nucleotides (not actually Whole genome sequencing) such as highly repetitive regions and heterchromatic regions such as centermeres/telomeres. DNA might be so bound up, highly repetitive stuff cannot be placed onto the map. 
+- Genome is a working hypothesis
+
+
+- Sequencing Platforms
+  - Short reads
+    - Ilumina sequencing (150 bp)
+    - SOLID (50bp)
+  - Long Reads
+    - Pacific Biosciences (5kb)
+    - Ion Torrent (500 bp)
+    - Ilumina Mollecule (up to 10 kb)
+- knowledge on organism
+  - genome size (K-mer approach: short, unique element of DNA sequence of length K).
+  - **HOW MANY** reads you need depends on size of the genome. There are some rules of thumb depending on size of the genome. 
+
+
+- Methods:
+
+  - Wet-lab
+
+    - Tissue
+      - high quality: energetically active (mDNA)
+      - avoid Gut and Skin- other DNA from symbionts or bacteria will be sequenced
+    - Quantity 1 mg -> 6 ug (short)
+
+  - Library Prep. 
+
+    - reads would occur in any direction (single end)
+
+    - paired end reads
+
+    - mate-pair
+
+    - contigs
+
+    - scaffold
+
+      ​
+
+  - Gc Content
+
+  - repeat abundance
+
+  - Duplicate reads
+
+- 50% of the reads come from contigs
+
+- Annotate your sequence (use from related genome)
+
+- Find them in NCBI
+
+## RNA Seq:
+
+- Advantages-
+
+  - Difference gene expressions
+
+  - allele specific expression- environmental response, adaptation
+
+  - function relevant subset of the genome
+
+    ​
+
+    | RNA sequencing                 | Micro-Array                              |
+    | ------------------------------ | ---------------------------------------- |
+    | wide range of expression value | X                                        |
+    | X                              | saturation of analog type fluorescent signal |
+    | info on splicing events        | X                                        |
+
+- Limitations to RNA seq
+
+  - Can tell you about differential gene expression, but not protein expression, so difficult to say something about the function
+
+- Work flow
+
+  - set up
+  - wet lab
+  - sequence strategy
+  - Bio-info
+  - Statistical measures
+
+- What's your purpose? 
+
+  - coding or regulator non-coding
+  - reference genome or not?
+  - Alternative splicing?
+  - which technology can be good for your research question?
+  - populations v. specific treatments?
+
+- Stats: biological replication
+
+- Choice of tissue and when you are taking the tissue because, for example, differential gene expression with daylight in plants- circadian rhythm 
+
+- Pool samples in the case of small organisms
+
+
+
+- RNA extraction to get good yield:
+
+  - RNAse free environment
+  - DNAse treatment
+  - get rid of ribosomal RNAs
+  - mRNA is enriched with Poly A tail 
+
+- cDNA:
+
+  - RNA is reverse transcribed to DNA (cDNA)
+
+- Library
+
+  - single end
+  - paired end
+
+- Choose what kind of sequencing platform:
+
+  - Pyro sequencing by Roche, Ion Torrent
+  - GA/hiseq by Illumina
+  - Error profiles: incorrect homop…, GC content
+
+- seq coverage: greater than 100 million bp?
+
+- Programming: python, UNIX, R
+
+  ## Amplicon sequencing
+
+  - Targeted approach for analyzing genetic variation in specific genomic regions. 
+
+  - methods
+
+    - library prep- 
+      - Extraction 
+      - first PCR (to amplify gene of interest)
+      - Clean PCR products (running gel or column)
+      - send to lab for sequencing or 2nd PCR (barcodes, adaptors), clean, and pool, and sequencing
+      - 454 sequencing (obsolete), MiSeq (newer-paired end sequencing) 
+    - sequencing
+    - data analysis
+      - **TRIM**: get your sequence back, and trim off sequence
+      - **ALIGN**: if there is a dash it wasn't read but the dash keeps them still aligned, sometimes a dash wasn't added and you need manually add one to keep reads aligned. 
+    - Applications
+
+  - | Whole Genome sequencing | RNA seq               | GBS RAD Seq         | Amplicons        |
+    | ----------------------- | --------------------- | ------------------- | ---------------- |
+    | Everything              | Gene space expressed  |                     | one gene         |
+    | single individuals      | few individuals (~93) | Lots of individuals | many individuals |
+    |                         |                       |                     |                  |
+
+## GBS (genotyping by sequencing)- (RAD Seq):
+
+- lots of SNPS across the genome, 
+
+
+- don't care about specific genes, 
+
+- don't need complete genome sequence
+
+- Looking at genetic diversity across multiple individuals
+
+- Getting the SNP genotypes by the process of sequencing (all in one step)
+
+- RAD- restriction assisted DNA sequencing (using restriction enzymes)
+
+- Restriction enzyme- enzyme meant to cut double stranded DNA
+
+  ![](stickyendsDNA.gif)
+
+
+- BarCodes & Adaptors stick on sticky ends
+- When some individuals do not have a restriction enzyme site, and you are only sequencing 100 bp, long fragments will not be sequenced and generate some missing data (trade off). Decide how much missing data you are willing to tolerate. 
+- "Reduced Representation" reduces number of reads you have to look at, but might generate missing data. 
+
 ------
 <div id='id-section5'/>
-### Page 5:
+### Page 5: 2017-02-07
+
+## Getting onto Unix Server...
+
+- Go into the Terminal
+
+- type:  ssh salger@pbio381.uvm.edu
+
+- type 'yes'
+
+- 'top' checks out the serve is being used and by who
+
+- 'q' quits that
+
+- ~/ (~: home directory) 
+
+- 'pwd': present working directory, analogous to "gwd" in R (get working directory)
+
+- 'll': list- to see what is in the directory
+
+- 'mkdir my data': Create a folder 'My Data': 
+
+- 'cd' - change directory, move into that directory 'cs mydata'
+
+- Goal: copy the data from shared file into my directory
+
+  - cd /data/ - go into group shared space, forward slash used to go into original data file, use the ~ to leap back into my personal directory
+  - ll- check to see what is in it
+  - go into project data. (Do not need forward slash because we are already in the shared directory) (cd project_data)
+  - copy into my directory  'cp ssw_sample.txt ~/mydata'
+  - move to my directory '~/mydata'
+  - use head command to check file 'head ssw_samples.txt'
+  - use tail to check end of file 'tail ssw_samples.txt'
+  - to check just first 15 lines:
+    - head -n 15 saw_samples.txt
+  - Grep: Generalized Regular Expressions
+  - **grep 'HH' ssw_samples.txt**
+  - move to a new folder:
+  - **grep 'HH' ssw_samples.txt >ssw_HHonly.txt**
+  - move all files ending with only.txt to folder: 
+  - **mv *only.txt  sample_by_disease/**
+
+  man grep - to see the help menu for the grep command
+
+- rm (remove file)
+
+- ll -a (shows hidden files)
+
+- To have the command line ask if we want
+
+- typing in a directory, hit tab tab to see what the possibilities are
+
 ------
 <div id='id-section6'/>
-### Page 6:
+### Page 6: 2017-02-07
+
+## RNA-seq tutorial
+
+Here is the path for raw reads:
+
+```
+cd  /data/project_data/fastq/
+```
+
+- Samples I'm doing:
+
+  ```
+  38_6-18_S_2_R1.fq.gz & 38_6-18_S_2_R2.fq.gz
+  ```
+
+Look at the file:
+
+```
+zcat 38_6-18_S_2_R1.fq.gz | head
+```
+
+There is a script already made that will trim my reads. I will copy this script into my scripts folder...
+
+```
+cp  /data/scripts/trim_example.sh .
+```
+
+period at the end copies that folder into the folder I am presently in. 
+
+To look at the trim_example script….
+
+```
+vim trim_example.sh
+```
+
+'i', to insert or edit in Vim
+
+enter the file names and file directory as follows:
+
+```
+#!/bin/bash
+      java -classpath /data/popgen/Trimmomatic-0.33/trimmomatic-0.33.jar org.usadellab.trimmomatic.TrimmomaticPE \
+                -threads 1 \
+                -phred33 \
+                 /data/project_data/fastq/38_6-18_S_2_R1.fq.gz \
+                 /data/project_data/fastq/38_6-18_S_2_R2.fq.gz \
+                 /data/project_data/fastq/cleanreads/"38_6-18_S_2_R1_clean_paired.fa" \
+                 /data/project_data/fastq/cleanreads/"38_6-18_S_2_R1_clean_unpaired.fa" \
+                 /data/project_data/fastq/cleanreads/"38_6-18_S_2_R2_clean_paired.fa" \
+                 /data/project_data/fastq/cleanreads/"38_6-18_S_2_R2_clean_unpaired.fa" \
+                 ILLUMINACLIP:/data/popgen/Trimmomatic-0.33/adapters/TruSeq3-PE.fa:2:30:10 \
+                 LEADING:28 \
+             TRAILING:28 \
+             SLIDINGWINDOW:6:28 \
+             HEADCROP:9 \
+             MINLEN:35 \
+```
+
+Save the script by clicking shift + colon    wq
+
+
+
+Change settings to get executable run, write, read access:
+
+```
+chmod u+x trim_example.sh 
+```
+
+Running the script:
+
+```
+./trim_example.sh
+```
+
+Let's take a look in the file.. type  the following and hit tab tab to see what is in it (or go into the cd and then type "ls")
+
+
+
+```
+cd /data/project_data/fastq/cleanreads/
+```
+
+
+
 ------
 <div id='id-section7'/>
 ### Page 7:
