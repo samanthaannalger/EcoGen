@@ -213,6 +213,7 @@
 
 ------
 <div id='id-section1'/>
+<<<<<<< HEAD
 ### Page 1: 2017-01-23
 
 ### Next Gen Sequencing
@@ -369,10 +370,6 @@ Can we tell anything about the pathogen identity based on expression of immune g
 What is the immune response? Is it different between 2 spp. of starfish?
 
 Blast against other infected seastars to be confident that these seastars are infected with Densovirus.
-
-
-
-
 
 ------
 <div id='id-section4'/>
