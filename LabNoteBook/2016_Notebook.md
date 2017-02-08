@@ -15,7 +15,7 @@
 * [Page 4: 2017-02-01](#id-section4). Genome sequencing types
 * [Page 5: 2017-02-01](#id-section5). Getting onto Unix Server, Terminal Commands
 * [Page 6: 2017-02-07](#id-section6). RNA-seq Tutorial
-* [Page 7:](#id-section7).
+* [Page 7: 2017-02-08](#id-section7). Transcriptomics
 * [Page 8:](#id-section8).
 * [Page 9:](#id-section9).
 * [Page 10:](#id-section10).
@@ -726,7 +726,184 @@ cd /data/project_data/fastq/cleanreads/
 
 ------
 <div id='id-section7'/>
-### Page 7:
+### Page 7: 2017-02-08
+
+### Transcriptomics
+
+Why wild systems?
+
+* non model/non traditional model organisms
+* silent genes responding to multiple stimuli
+* variation between individuals and between populations
+* novel trascripts without homologs in closly related model organisms
+
+
+
+Microarray: easy for ecological analyses
+
+RNAseq: genome wide ecological tracripts, more involved analyses
+
+
+
+1. How much variation is there in gene expression and how is it structured? 288
+2. How do environmental stimuli affect expression? 15
+3. How does gene expression affect phenotype? 136
+
+______
+
+### Evolutionary Process
+
+* Gene expression heritable <———— Acted on by Natural Selection
+
+* Epigenetics
+
+* Qst -Fst comparisons
+
+* eQTL- expression quantitative trait loci mapping- Id
+
+  * Expression popultions within populations
+
+* Macroevolution
+
+  * drift, selection, bottleneck
+
+    ​
+###How does environment affect expression?
+* abiotic stress
+* Environmental heterogeneity
+* host-parasite interactions
+* selective biotic and abiotic interactions
+* Molecular
+* genotype
+* phenotypic plasticity
+
+
+
+
+* Flash Freeze
+
+* 'snap shot'
+
+* time course analyses
+
+  * transcriptional responses through time $$$
+
+______
+
+### Alternate phenotypes
+
+* moving from correlation to causation
+  * transgenics, RNAi, Crisper/CAS
+  * So, if you have a candidate gene associated with a phenotype, you knock it down or out and see if you still get the phenotype
+
+______________
+
+### Future:
+
+RNAseq
+
+Are probes available for the questions we are asking?
+
+Database for proposed ecological annotations?
+
+_____________
+
+### Problems:
+
+bias in signals
+
+Heterogous arrays
+
+polyploidy
+
+RNA pooling
+
+statistical analyses
+
+unannotated genes 
+
+_______-
+
+Something to think about: Expression as a phenotype vs. expression causing a phenotype?
+
+_________
+
+### Paper discussion:
+
+De Panis et al. 2016
+
+Summary of big questions and study system? and what tools used? walk folks through figures
+
+___________________
+
+### Command line stuff!
+
+* skills learning objectives:
+* scripts
+* paths
+  * program
+  * imput
+  * output
+* Filenames
+  * in
+  * out
+* moving through directories/files
+* SCP- move from server to your PC
+* executing scripts
+* calling program
+
+Used to rename a file name:
+
+```
+mv filename newfilename
+```
+
+Or, can be used to move a file to a new directory
+
+```
+mv filename \data...filename
+```
+
+Cleaned file names are here….
+
+```
+cd /data/project_data/fastq/cleanreads
+```
+
+name of clean file names:
+
+```
+38_6-18_S_2_R1_clean_paired.fa
+38_6-18_S_2_R1_clean_unpaired.fa
+38_6-18_S_2_R2_clean_paired.fa
+38_6-18_S_2_R2_clean_unpaired.fa
+```
+
+Use fastqc to check out quality of the files… (check before and after cleaning)
+
+```
+fastqc 38_6-18_S_2_R1_clean_paired.fa
+fastqc 38_6-18_S_2_R1.fq.gz
+```
+
+**Need to navigate to the correct folder where the file lives to check...
+
+use pwd to check where you are...
+
+
+
+Next, open up a new terminal window and DO not sign onto the server, stay on your local drive (desktop, or somewhere better)… Now, move the html file (that was created with fastqc) to local drive with this command:
+
+```
+scp salger@pbio381.uvm.edu:/data/project_data/fastq/38_6-18_S_2_R1_fastqc.html ~/Desktop/
+```
+
+Now, find your file and check it out!
+
+![](Fastqc1.png)
+
+
+
 ------
 <div id='id-section8'/>
 ### Page 8:
