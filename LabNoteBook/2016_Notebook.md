@@ -1,9 +1,7 @@
-#Lab Notebook
+#Lab Notebook for Ecological Genomics
 
 ### Authors: Samantha Alger
 ###University of Vermont
-## Lab Notebook for Ecological Genomics
-
 ## Date started: (2017-01-21)
 ## Date end:
 
@@ -16,8 +14,8 @@
 * [Page 5: 2017-02-01](#id-section5). Getting onto Unix Server, Terminal Commands
 * [Page 6: 2017-02-07](#id-section6). RNA-seq Tutorial
 * [Page 7: 2017-02-08](#id-section7). Transcriptomics
-* [Page 8:](#id-section8).
-* [Page 9:](#id-section9).
+* [Page 8 2017-02-13:](#id-section8).Transcriptomics
+* [Page 9 2017-02-15:](#id-section9). Extract expression
 * [Page 10:](#id-section10).
 * [Page 11:](#id-section11).
 * [Page 12:](#id-section12).
@@ -906,10 +904,330 @@ Now, find your file and check it out!
 
 ------
 <div id='id-section8'/>
-### Page 8:
+### Page 8: 2017-02-13
+
+## Transcriptomics
+
+enables DE examination (inter- population individual)
+
+* disease resistance
+* mating behavior
+* adaptive significance
+
+molecular mechanisms -> phenotypic/behavioral plasticity (migration patterns)
+
+Limitations: ref genome quality, gene annotation availability, expense per sample lib. prep
+
+
+
+Issues: Under utilization of biological replicates
+
+* requiring independent library preparations
+* doesn't included pooled samples
+* 23/158 sequencing depth over replication
+* derive broad biological conclusions.
+* prioritize sequence depth over replication <- problem
+* sequence coverage: the average # of reads that align/cover known reference bases
+* read depth: Total number of bases sequenced/aligned at given reference base position
+* wide dynamic range of RNA-seq data-> noisy (poisson counting error), (technical variance), (biological variance). Biological variance
+
+### General rules of thumb
+
+* use more biological replicates instead of depth
+* sequence depth >10 reads/trasncript- 10 reads
+* 10-20 million mapped reads/sample
+* 3 biological replicates per condition
+* conduct a pilot experiment (what is best and most powerful experiment I can afford?)
+* What is the smallest fold change I can detect?
+
+______
+
+#### Working with our data:
+
+Useful command to allow command to run when your computer is off... 
+
+```
+screen
+```
+
+opens a new window.
+
+press control + a + d
+
+```
+screen -r
+```
+
+___________
+
+# Making a reference transcriptome and Mapping reads to the reference transcriptome
+
+Recall that the general RNAseq data processing work flow is to:
+
+1. Clean and evaluate reads (.fastq)
+2. Make and evaluate a transcriptome assembly (.fasta)
+3. Map cleaned reads to the transcriptome assembly (makes .sam files)
+4. From these sequence alignment files, we can extract two types of information: (a) read counts - the number of reads that uniqely map to each “gene” and (b) single nucleotide polymorphisms between a sample and the reference.
+5. With these two types of data, we can go on to differential gene expression analyses and population genomics.
+
+Settling on a high quality reference transcriptome is an iterative process that requires testing different assembly parameters and inputs and evaluating the quality several ways. A quick way for us to move forward with our data analyses for this course, however, is to predict open reading frames (ORFs - include start and stop codons) and keep only transcripts that are at least 100 amino acids long. To do this we can use the program TransDecoder.
+
+Download TransDecoder to use to predict longest Open Reading Frames (ORFs)
+
+```
+wget https://github.com/TransDecoder/TransDecoder/archive/v3.0.1.zip
+```
+
+```
+$ cd /data/project_data/assembly/
+$ /data/popgen/TransDecoder-3.0.1/TransDecoder.LongOrfs -t Trinity.fasta 
+
+
+-first extracting base frequencies, we'll need them later.
+CMD: /data/popgen/TransDecoder-3.0.1/util/compute_base_probs.pl Trinity.fasta 0 > Trinity.fasta.transdecoder_dir/base_freqs.dat
+CMD: touch Trinity.fasta.transdecoder_dir/base_freqs.dat.ok
+
+
+- extracting ORFs from transcripts.
+-total transcripts to examine: 73435
+[73400/73435] = 99.95% done    
+
+#################################
+### Done preparing long ORFs.  ###
+##################################
+
+    Use file: Trinity.fasta.transdecoder_dir/longest_orfs.pep  for Pfam and/or BlastP searches to enable homology-based coding region identification.
+
+    Then, run TransDecoder.Predict for your final coding region predictions.
+```
+
+Evaluate the “longest_orfs.cds” assembly after running Transdecoder.
+
+```
+$ /data/popgen/trinityrnaseq-Trinity-v2.3.2/util/TrinityStats.pl longest_orfs.cds
+
+
+################################
+## Counts of transcripts, etc.
+################################
+Total trinity 'genes':  5693
+Total trinity transcripts:  8573
+Percent GC: 49.08
+
+########################################
+Stats based on ALL transcript contigs:
+########################################
+
+    Contig N10: 1626
+    Contig N20: 1032
+    Contig N30: 780
+    Contig N40: 612
+    Contig N50: 498
+
+    Median contig length: 390
+    Average contig: 518.78
+    Total assembled bases: 4447500
+
+
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per 'GENE':
+#####################################################
+
+    Contig N10: 1623
+    Contig N20: 1080
+    Contig N30: 828
+    Contig N40: 642
+    Contig N50: 528
+
+    Median contig length: 402
+    Average contig: 534.41
+    Total assembled bases: 3042405
+```
+
+We can also evaluate this assembly by using blastp to compare it to the uniprot_swissprot database.
+
+```
+wget https://github.com/Trinotate/Trinotate/releases
+
+# Run the script to download the relevant databases.
+/data/popgen/Trinotate-3.0.1/admin/Build_Trinotate_Boilerplate_SQLite_db.pl  Trinotate
+```
+
+```
+#!/bin/bash/
+cd /data/popgen/databases/
+makeblastdb -in uniprot_sprot.pep -dbtype prot -out uniprot_sprot
+blastp -query /data/project_data/assembly/Trinity.fasta.transdecoder_dir/longest_orfs.pep  -db /data/popgen/databases/uniprot_sprot  -max_target_seqs 1 -outfmt 6 -evalue 1e-5 -num_threads 10 > blastp.outfmt6
+```
+
+```
+TransDecoder.Predict -t target_transcripts.fasta --retain_blastp_hits blastp.outfmt6
+```
+
+These transcriptome assembly processes are ongoing. But for now we will map to the 5,693 “genes” based on the longest ORFs.
+
+Options for improving this assembly include: (1) using more reads from other individuals or trying a different individual, (2) changing the cleaning and assembly parameters. We can evaluate based on the percentage of genes that have good blastp hits and the percentage of single copy orthologs included in the reference (for example using the new program [BUSCO](http://busco.ezlab.org/).
+
+## Map reads from individual samples to reference transcriptome
+
+1. Navigate to the `/data/scripts/` directory to find a script called `bwaaln.sh` that you can
+2. copy `cp` to your home directory `~/scritps/` and
+3. open with `vim` to edit.
+4. You need to enter your “left” reads file name (for those cleaned and paired).
+5. Step through the script to make sure you understand each command.
+
+The script looks like this:
+
+```
+#!/bin/bash 
+ 
+# To run from present directory and save output: ./bwaaln.sh > output.bwaaln.txt 
+
+myLeft='38_6-24_S_5_R1.fq.gz_left_clean_paired.fq'
+echo $myLeft
+
+myRight=${myLeft/_R1.fq.gz_left/_R2.fq.gz_right} 
+echo $myRight
+
+myShort=`echo $myLeft | cut -c1-11`
+echo $myShort
+
+# bwa index /data/project_data/assembly/longest_orfs.cds  # This only needs to be done once on the reference
+
+bwa aln /data/project_data/assembly/longest_orfs.cds /data/project_data/fastq/cleanreads/$myLeft > $myLeft".sai"
+bwa aln /data/project_data/assembly/longest_orfs.cds /data/project_data/fastq/cleanreads/$myRight > $myRight".sai"
+bwa sampe -r '@RG\tID:'"$myShort"'\tSM:'"$myShort"'\tPL:Illumina' \
+        -P /data/project_data/assembly/longest_orfs.cds $myLeft".sai" $myRight".sai" \
+        /data/project_data/fastq/cleanreads/$myLeft \
+        /data/project_data/fastq/cleanreads/$myRight > $myShort"_bwaaln.sam"
+```
+
+This script could also be made into a loop to map reads of all files one after another to the transcriptome. We could also tidy up file names using `mv` or `rename`.
+
+## You’ve made a Sequence AlignMent (SAM) file!
+
+A SAM file is a tab delimited text file that stores information about the alignment of reads in a FASTQ file to a reference genome or transcriptome. For each read in a FASTQ file, there’s a line in the SAM file that includes
+
+- the read, aka. query, name,
+- a FLAG (number with information about mapping success and orientation and whether the read is the left or right read),
+- the reference sequence name to which the read mapped
+- the leftmost position in the reference where the read mapped
+- the mapping quality (Phred-scaled)
+- a CIGAR string that gives alignment information (how many bases Match (M), where there’s an Insertion (I) or Deletion (D))
+- an ‘=’, mate position, inferred insert size (columns 7,8,9),
+- the query sequence and Phred-scaled quality from the FASTQ file (columns 10 and 11),
+- then Lots of good information in TAGS at the end, if the read mapped, including whether it is a unique read (XT:A:U), the number of best hits (X0:i:1), the number of suboptimal hits (X1:i:0).
+
+The left (R1) and right (R2) reads alternate through the file. SAM files usually have a header section with general information where each line starts with the ‘@’ symbol. SAM and BAM files contain the same information; SAM is human readable and BAM is in binary code and therefore has a smaller file size.
+
+Find the official Sequence AlignMent file documentation can be found [here](http://samtools.github.io/hts-specs/SAMv1.pdf).
+
+[This BWA man page](http://bio-bwa.sourceforge.net/bwa.shtml) also discusses SAM alignment format and BWA specific optional fields.
+
+- [Some FLAGs to know](http://seqanswers.com/forums/showthread.php?t=17314) - for example what do the numbers in the second column of data mean? [Here’s a SAM FLAG decoder](https://broadinstitute.github.io/picard/explain-flags.html) by the Broad Institute.
+- What about the map quality score, MapQ? That’s important! [Here’s a reference](http://www.acgt.me/blog/2014/12/16/understanding-mapq-scores-in-sam-files-does-37-42).
+
 ------
 <div id='id-section9'/>
-### Page 9:
+### Page 9: 2017-02-15
+
+## Transcriptomes 
+
+Extract expression
+
+What's going on in the background?
+
+### Continuing  with Sequence Alignment files and Read count extraction
+
+
+
+#### Let’s check out our .sam files! Try `head` and `tail`.
+
+```
+tail -n 100 38_6-18_S_2_bwaaln.sam > tail.sam
+vim tail.sam
+
+:set nowrap
+```
+
+
+
+## You’ve made a Sequence AlignMent (SAM) file!
+
+A SAM file is a tab delimited text file that stores information about the alignment of reads in a FASTQ file to a reference genome or transcriptome. For each read in a FASTQ file, there’s a line in the SAM file that includes
+
+- the read, aka. query, name,
+- a FLAG (number with information about mapping success and orientation and whether the read is the left or right read),
+- the reference sequence name to which the read mapped
+- the leftmost position in the reference where the read mapped
+- the mapping quality (Phred-scaled)
+- a CIGAR string that gives alignment information (how many bases Match (M), where there’s an Insertion (I) or Deletion (D))
+- an ‘=’, mate position, inferred insert size (columns 7,8,9),
+- the query sequence and Phred-scaled quality from the FASTQ file (columns 10 and 11),
+- **then Lots of good information in TAGS at the end, if the read mapped, including whether it is a unique read (XT:A:U), the number of best hits (X0:i:1), the number of suboptimal hits (X1:i:0).**
+
+
+
+BWA generates the following optional fields. Tags starting with ‘X’ are specific to BWA.
+
+> | **Tag**                                  | **Meaning**                              |
+> | ---------------------------------------- | ---------------------------------------- |
+> |                                          |                                          |
+> |                                          |                                          |
+> | **NM**                                   | Edit distance                            |
+> | **MD**                                   | Mismatching positions/bases              |
+> | **AS**                                   | Alignment score                          |
+> | **BC**                                   | Barcode sequence                         |
+> |                                          |                                          |
+> |                                          |                                          |
+> | **X0**                                   | Number of best hits                      |
+> | **X1**                                   | Number of suboptimal hits found by BWA   |
+> | **XN**                                   | Number of ambiguous bases in the referenece |
+> | **XM**                                   | Number of mismatches in the alignment    |
+> | **XO**                                   | Number of gap opens                      |
+> | **XG**                                   | Number of gap extentions                 |
+> | **XT**                                   | Type: Unique/Repeat/N/Mate-sw            |
+> | **XA**                                   | Alternative hits; format: (chr,pos,CIGAR,NM;)* |
+> |                                          |                                          |
+> |                                          |                                          |
+> | **XS**                                   | Suboptimal alignment score               |
+> | **XF**                                   | Support from forward/reverse alignment   |
+> | Why is it important to consider whether a read maps uniquely (i.e., to one place in the transcriptome) for gene expression studies? | Number of supporting seeds               |
+
+
+
+#### Let’s see how many of our reads map uniquely.
+
+Why is it important to consider whether a read maps uniquely (i.e., to one place in the transcriptome) for gene expression studies?
+
+```
+$ grep -c XT:A:U 38_6-18_S_2_bwaaln.sam  
+1177827
+
+$ grep -c X0:i:1 38_6-18_S_2_bwaaln.sam 
+1182952
+```
+
+
+
+- "sed" find and replace command
+
+- "-i" find and replace right in the command line
+
+- "s" search
+
+- "/::/" search for two colons
+
+- "/ \ _ /" replace with an underscore
+
+- g = option
+
+- ```
+  sed -i `s/::/\_/g' 38_6-18_S_2_bwaaln.sam
+  ```
+
+  ​
+
 ------
 <div id='id-section10'/>
 ### Page 10:
