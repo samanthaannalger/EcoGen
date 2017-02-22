@@ -1,0 +1,14 @@
+---
+title: "RNAseqAnalysis"
+author: "Samantha A. Alger"
+date: "2/22/2017"
+output: html_document
+---
+
+```{r}
+# installing the package:
+source("https://bioconductor.org/biocLite.R")
+biocLite("DESeq2")
+
+```
+

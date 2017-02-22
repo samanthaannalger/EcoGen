@@ -16,7 +16,7 @@
 * [Page 7: 2017-02-08](#id-section7). Transcriptomics
 * [Page 8 2017-02-13:](#id-section8).Transcriptomics
 * [Page 9 2017-02-15:](#id-section9). Extract expression
-* [Page 10:](#id-section10).
+* [Page 10 2017-02-22:](#id-section10). RNAseq Differential Gene Expression Analysis
 * [Page 11:](#id-section11).
 * [Page 12:](#id-section12).
 * [Page 13:](#id-section13).
@@ -1230,7 +1230,15 @@ $ grep -c X0:i:1 38_6-18_S_2_bwaaln.sam
 
 ------
 <div id='id-section10'/>
-### Page 10:
+### Page 10: 2017-02-22
+
+### RNAseq Differential Gene Expression Analysis
+
+* [R Script for Gene Expression Analysis](RNAseqAnalysis.html)
+* ​
+
+
+
 ------
 <div id='id-section11'/>
 ### Page 11:
