@@ -1235,7 +1235,24 @@ $ grep -c X0:i:1 38_6-18_S_2_bwaaln.sam
 ### RNAseq Differential Gene Expression Analysis
 
 * [R Script for Gene Expression Analysis](RNAseqAnalysis.html)
-* ​
+
+#### Using the Terminal to get files into computer
+
+* Created a folder where I want to data files to go… then navigate to that folder:
+
+```
+cd /Users/samanthaalger/EcoGen/seaStarWastingProject/
+```
+
+Then, copy the files into that folder:
+
+```
+scp salger@pbio381.uvm.edu:/data/project_data/DGE/* .
+```
+
+
+
+
 
 
 
