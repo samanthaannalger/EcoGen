@@ -17,10 +17,10 @@
 * [Page 8 2017-02-13:](#id-section8).Transcriptomics
 * [Page 9 2017-02-15:](#id-section9). Extract expression
 * [Page 10 2017-02-22:](#id-section10). RNAseq Differential Gene Expression Analysis
-* [Page 11:](#id-section11).
-* [Page 12:](#id-section12).
-* [Page 13:](#id-section13).
-* [Page 14:](#id-section14).
+* [Page 11 2017-03-01:](#id-section11). RNAseq Differential Gene Expression Analysis Continued
+* [Page 12 2017-03-20:](#id-section12). Population structure and genotypic clustering analyses
+* [Page 13 2017-03-22:](#id-section13). Erin's talk
+* [Page 14 2017-03-27:](#id-section14). Selective Sweeps
 * [Page 15:](#id-section15).
 * [Page 16:](#id-section16).
 * [Page 17:](#id-section17).
@@ -1258,16 +1258,416 @@ scp salger@pbio381.uvm.edu:/data/project_data/DGE/* .
 
 ------
 <div id='id-section11'/>
-### Page 11:
+### Page 11: RNAseq Differential Gene Expression Analysis Continued
+
+
+
+#### MoHammad's Info Update:
+
+WGCNA: R package apply correlation network methods to describe correlation (coexpression) patterns among genes in micro-array samples
+
+
+
+Network Construction:
+
+Node-Gene, nodes are genes, and edges are how strongly the two genes are correlated in terms of expression. 
+
+package provides different co expression measures
+
+signed networks- positive correlation in expression
+
+unsigned networks: takes absolute value- correlation in expression
+
 ------
 <div id='id-section12'/>
-### Page 12:
+### Page 12: 2017-02-20
+
+### Population structure and genotypic clustering analyses
+
+Genomics and genetics allowed for the objective definition of a population
+
+Global ancestry: est. proportation of ancestry contributed by different pop. ave across genome
+
+Local Ancestry: (LA): each chromosome a ___ segments from different ancestral population. goal of indety pop of orih
+
+
+
+Model Based approaches:
+
+* STRUCTURE: Bayesian approach, program that gives good impression of global populations, number of populations in a sample, "k"= (clusters).
+
+
+* AdMIXTURE: Maximum likelihood framework instead of Bayesian. assigns allehel frequencies to populations under assumptions of Hardy-Weinberg and linkage equilibrium. Considerably faster than STRUCTURE. 
+
+NonParametric approaches:
+
+* MULTIVARIATE ANALYSES that use two different approaches:
+* clustering (pairwise data matrix), clustering program (P.U. data matrix, cluster program) phenograms
+* ordination methods: PCA, multipscale dimensioning, take a large dataset with a large number of dimensions, and reduce it to a smaller number of dimensions to capture the variation.
+
+
+
+AdMixed Pop.:
+
+Hidden Markov Model (HMM): tries to fit a probleistic to the model. 
+
+LAMP
+
+RFMix: uses a discrimination
+
+assumptions: we know k, and we know their allele frequencies. (in fact, we rarely, know that). 
+
+​	Do simulations to figure out allelle frequencies. 
+
+Local ancestry method: Human Neanderthal genome. 
+
+
+
+1) Final VCF data
+
+​	N=24
+
+​	 filter process, output to home directory
+
+2) estimate allele frequencies between healthy and sick individuals for all SNPS (raw frequencies) f(H) - f (S)
+
+2b) Fst, between H vs. S
+
+​	output to local machine and plot in R
+
+3) estimate pi at synonymous sites, nonsynonymous sites, and look at ratio to tell us something about strength of purifying selection
+
+​	output to local- compare to Rominger paper data to see how data falls in with life history continuum 
+
+_____________
+
+```
+login: ssh salger@pbio381.uvm.edu
+$ cd /data/project_data/snps/reads2snps
+$ vcftools --gzvcf SSW_by24inds.txt.vcf.gz --min-alleles 2 --max-alleles 2 --maf 0.02 --max-missing 0.8 --recode --out ~/SSW_all_biallelic.MAF0.02.Miss0.8  
+$ cd ~/
+$ gzip SSW_all_biallelic.MAF0.02.Miss0.8.recode.vcf
+```
+
+
+
+ 
+
+
+
 ------
 <div id='id-section13'/>
-### Page 13:
+### Page 13: 2017-03-22
+
+### Erin's talk
+
+outline:
+
+* Species Divergence with gene flow
+* allopatric vs. sympatric speciation
+* inferring history of divergence 
+  * genomic scans
+  * likelihood/model-based methods
+* historical gene flow and LD patterns
+* NGS advantages and limitations
+
+
+
+#### Allopatric speciation 
+
+​	absence of gene flow
+
+​	physically isolatd
+
+​	new way species are formed?
+
+​	(genetic drift) 
+
+#### Sympatric speciation
+
+​	sympatric speciation
+
+​	presence of gene flow
+
+​	via diversifying selection
+
+​	selecting genes appear diverging
+
+​	neutral alleles appear homogenous
+
+
+
+#### Inferring history of divergence
+
+Genomic scans: looking at different areas of the genome and comparing rates of divergence
+
+* island of differentiation
+  * distribution of summary stats measuring diff (Fst)
+  * high Fst -> region under selection
+* Gene vs. population trees
+  * compare assumed pop. trees to gene trees
+  * compare different genes
+* D statistic determines introgression (ABBA BABBA)
+  * compares trees
+  * no introgression D= 0, ABBA=BABBA
+  * introgression, ( gene flow between lineages- leading to belief that one tree is better),
+  * D does not equal 0, 
+  * Limitations: throws out data, requires many genomes, same value=multiple explanations
+
+#### Likelihood/model-based methods
+
+Allele frequency spectrum (AFS)
+
+* use count data -> distribution with characteristic
+* histogram of SNP frequency
+
+Assumptions:
+
+* all SNPS are independent
+* Free recombination among SNPS
+* mutation rates are equal
+
+Limitations
+
+* comp challenging
+* lose a lot of data
+* expensive
+
+
+
+#### Genealogy sampling
+
+multiple regions -> 1 gene tree
+
+est. Ne, M ,admixture
+
+Assumptions
+
+* Free recombination among SNPs
+* complete linkage with loci
+* mutation rates vary across genome
+
+
+
+#### Likelihood-free
+
+approx. Bayesian comp. (ABC)
+
+simulations under model of interest- "easy"
+
+Distr. of haplotype lengths
+
+recombination -> shorter fragments/time
+
+
+
+#### Approx. of conditional likelihoods
+
+ancestral recombination graphs
+
+limitations: Very complex, difficult to ID correct of ARct
+
+____________
+
+```
+screen
+screen -r 
+```
+
+To run a program on the server and allow you to shut your computer (screen). (control + a + d) will detach.  (screen-r) will re-attach
+
+
+
+output summary:
+
+```
+################################################################################
+#                              Biological Summary                              #
+################################################################################
+
+Selected ingroup species: sp
+
+Number of analyzed individual: 24 (from 1 population(s))
+
+Total number of contig used for sequence analysis: 1113
+
+Total number of SNPs: 5040
+
+  - Biallelic: 4991
+  - Triallelic: 49
+  - Quadriallelic: 0
+
+# Fit= like an Fst value, appear to have low structure= randomly mating
+Fit:
+
+Average Fit: -0.0507419 [-0.06817; -0.031933]
+(Fit calculated in 902 contigs)
+
+Weir & Cockerham Fit (Evolution 1984):
+
+Average Weir & Cockerham Fit: 0.00703754 [-0.017669; 0.032047]
+(Fit calculated in 902 contigs)
+
+piN/piS ratio:
+# pi at synonymous sites:
+Average piS in focal species: 0.00585312 [0.005172; 0.006598]
+
+# pi at non-synonymous sites (1/5 the diversity)- selection is eliminating non-synonymous mutations as they come up
+Average piN in focal species: 0.00154546 [0.00133; 0.001782]
+
+# index of how effective selection - higher value: selecion isnt as effective at eliminating mutation that are deletarious. typically Low for bacteria and invertebrates with huge population sizes.  (Ratio between 0 and 1)
+Average piN / average piS: 0.264041 [0.223914; 0.310575]
+(piS and piN calculated in 902 contigs of average length 50)
+
+Individual heterozygosity:
+
+H(03_5-08_S_2): 0.00292949
+H(07_5-08_S_1): 0.00212127
+H(08_5-08_H_0): 0.00160917
+H(09_5-08_H_0): 0.00146331
+H(10_5-08_H_0): 0.00118121
+H(14_5-08_S_2): 0.00240668
+H(15_5-08_H_0): 0.00153744
+H(19_5-11_H_0): 0.00209038
+H(20_5-08_H_0): 0.000972337
+H(22_5-08_S_1): 0.00127272
+H(23_5-17_S_2): 0.00252627
+H(24_5-08_H_0): 0.000786939
+H(26_5-08_S_2): 0.00145689
+H(27_5-08_H_0): 0.00185711
+H(28_5-08_S_1): 0.00137447
+H(29_5-08_S_2): 0.00200665
+H(31_6-12_H_0): 0.00178091
+H(32_6-12_H_0): 0.00216789
+H(33_6-12_H_0): 0.00210024
+H(34_6-12_H_0): 0.00186592
+H(35_6-12_H_0): 0.00229033
+H(36_6-12_S_1): 0.00264985
+H(37_6-12_H_0): 0.00230314
+H(38_6-12_H_0): 0.0028128
+
+
+```
+
+
+
+* **PiS:** 0.00585312 [0.005172; 0.006598]
+* **PiN:** 0.00154546 [0.00133; 0.001782]
+* **ave. piN/piS:** 0.264041 [0.223914; 0.310575]
+
+
+
+scp salger@pbio381.uvm.edu:/data/project_data/fastq/38_6-18_S_2_R1_fastqc.html ~/Desktop/
+
+
+
+
+
+
+
 ------
 <div id='id-section14'/>
-### Page 14:
+### Page 14: 2017-03-27: Selective Sweeps.
+
+#### Alison's InfoUpdate:
+
+* Why do we care?
+
+  * Health of a population?
+
+* Selection events (antibiotics etc.) : "Sweeps" through a population and causes
+
+  * rise in allele frequency
+  * potential reduction in variation in allele frequency, and 
+
+* Sweeps: increase of frequency of allele AND hitchhiking (genes closely related) genes within population
+
+* as a result of a selective sweep: expect genetic diversity to decrease
+
+  #### Type of sweeps:  have to do with resulting allele frequencies
+
+* HARD: single adaptive allele is common and fixed in resulting populations
+
+* SOFT: more than one adaptive allele allele in different genetic background
+
+#### Examples:
+
+antibiotic resistance, lactose tolerance,
+
+Can be hard on a local scale and soft on a global scale
+
+#### Key Parameters
+
+theta: rate at which a mutation enters a population. 
+
+theta: 2 (effective populations size) * (mutation rate)
+
+#### What factors influence theta:
+
+fitness effects: relative differences in reproduction among individuals
+
+population size
+
+#### If we see differences in genetics in our seastar population, How to interpret? Could be a number of alternative hypotheses… (because)
+
+* drift
+
+* neutral variation? Do they have functional differences?
+
+* cause and effects?
+
+  _________________-
+
+#### Messer Paper discussion:
+
+How do selection events affect the genome?
+
+Hard vs. Soft sweeps, bottlenecks
+
+Goals:
+
+Infer for each species: 
+
+* explain colonization event, when? how? gene flow?
+* Candidate gene
+* Estimate the age at which the mutation arise/selective sweep that generated the blanched phenotype?
+  * is this in line with when the dunes formed?
+
+#### Fosmid:
+
+Creating clones of a genomic area of interest: randomly shear genome with enzymes, insert fragments into plasmids in E coli. grow in a petri dish, use probe to identify which colonies contain your gene of interest. 
+
+
+
+Choose 96 clones and sequence them: use to estimate the demographic history of colonization and use as a control to see if MC1R is acting differently (and if selection is acting on the gene). 
+
+Capture probes= primers made from the fosmids, and use to sequence only the section of interest in other individuals. Use Illumina sequencing:
+
+Filter the data: Minimize the false positive SNPS , etc. Eliminated all SNPS with any missing data. 
+
+Series of analyses: demographic model, look for signatures of selection, estimate age of selected allele. 
+
+​		
+
+_______-
+
+```
+ #In terminal window, (on local computer) type in:
+ #to naviate to the folder where you want the files to go...
+ cd seaStarWastingProject/
+ 
+ #copy the files of interest to where you are (in seastar folder)
+ scp salger@pbio381.uvm.edu:/data/project_data/snps/reads2snps/ssw_healthloc.txt .
+```
+
+
+
+
+​		
+​	
+
+
+
 ------
 <div id='id-section15'/>
 ### Page 15:
