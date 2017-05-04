@@ -21,7 +21,7 @@
 * [Page 12 2017-03-20:](#id-section12). Population structure and genotypic clustering analyses
 * [Page 13 2017-03-22:](#id-section13). Erin's talk
 * [Page 14 2017-03-27:](#id-section14). Selective Sweeps
-* [Page 15:](#id-section15).
+* [Page 15 2017-04-12:](#id-section15). Host genetic associations with the micro biome
 * [Page 16:](#id-section16).
 * [Page 17:](#id-section17).
 * [Page 18:](#id-section18).
@@ -1670,7 +1670,39 @@ _______-
 
 ------
 <div id='id-section15'/>
-### Page 15:
+### Page 15: 2017-04-12
+
+### Host genetic associations with the microbiome
+
+micro biome- digestive, immune, vitamins, xenobiotics, pathogens
+
+Heritability: the proportion of variance in a host trait which is measured across a population and is explained by genetic mechanisms rather than environmental. directly or through genetic association studies
+
+Ex: Hutterites
+
+* 15 heritable taxa
+* seasonal
+  * olfactory receptor genes associated with microbes in their gut
+
+Cross- study comparisons
+
+* mice GTL studies have identified genes related to immune function
+* plants QTL, genotypic effects on species richness, abundance of individual taxa
+
+Limitations
+
+MB $, small N -> low significant results
+
+lacking taxa
+
+meta analyses, no significant results bc multiple disparate 
+
+Unified sample sequencing and analysis
+
+
+
+ 
+
 ------
 <div id='id-section16'/>
 ### Page 16:
